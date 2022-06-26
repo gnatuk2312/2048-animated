@@ -6,7 +6,7 @@ import Tile from "./Tile";
 import Cell from "./Cell";
 import congrats from "../assets/img/ava.JPG";
 
-const BoardView = ({swipeDirection}) => {
+const BoardView = ({swipeDirection, swiped}) => {
     const [board, setBoard] = useState(new Board());
     const [showCongrats, setShowCongrats] = useState("");
     const [wasShown, setWasShown] = useState(false);
@@ -44,7 +44,7 @@ const BoardView = ({swipeDirection}) => {
 
         handleSwipe();
         //eslint-disable-next-line
-    }, [swipeDirection])
+    }, [swipeDirection, swiped])
 
     const cells = board.cells.map((row, rowIndex) => {
         return (
