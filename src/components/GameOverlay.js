@@ -1,6 +1,7 @@
 import TryAgainLogo from "../assets/img/try-again.gif";
 
 const GameOverlay = ({onRestart, board}) => {
+
     if (board.hasWon()) {
         return <div className="tile2048"></div>
     } else if (board.hasLost()) {
@@ -20,7 +21,7 @@ const GameOverlay = ({onRestart, board}) => {
         )
     }
 
-    return null;
+    return null
 };
 
 export default GameOverlay;

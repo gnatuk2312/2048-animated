@@ -4,9 +4,23 @@ import { Board } from "../helper";
 import GameOverlay from "./GameOverlay";
 import Tile from "./Tile";
 import Cell from "./Cell";
+import congrats from "../assets/img/ava.JPG";
 
 const BoardView = ({swipeDirection}) => {
     const [board, setBoard] = useState(new Board());
+    const [showCongrats, setShowCongrats] = useState("");
+    const [wasShown, setWasShown] = useState(false);
+
+    useEffect(() => {
+        if (board.score > 300 && !wasShown) {
+            setShowCongrats("isVisible")
+
+            setTimeout(() => {
+                setShowCongrats("");
+                setWasShown(true);
+            }, 4000)
+        }
+    }, [setShowCongrats, board.score, wasShown, setWasShown])
 
     const handleKeydown = (event) => {
         if (board.hasWon()) {
@@ -48,6 +62,7 @@ const BoardView = ({swipeDirection}) => {
 
     const resetGame = () => {
         setBoard(new Board());
+        setWasShown(false);
     }
 
     return (
@@ -62,11 +77,17 @@ const BoardView = ({swipeDirection}) => {
                     <div>{board.score}</div>
                 </div>
             </div>
+            <p className="header_text">Зроблено з любов'ю by <br/> Hnat Liashenko ❤️</p>
             <div className="board">
                 {cells}
                 {tiles}
                 <GameOverlay onRestart={resetGame} board={board} />
             </div>
+            <img 
+                className={`congrats ${showCongrats}`} 
+                src={congrats} 
+                alt="congrats" 
+            />
         </div>
     );
 };
